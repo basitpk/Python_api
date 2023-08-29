@@ -1,0 +1,12 @@
+[Unit]
+Description=Gunicorn instance to serve flaskapp
+After=network.target
+ 
+[Service]
+User=user 
+Group=user
+WorkingDirectory=/home/user/Python_api
+ExecStart=/home/user/.local/bin/gunicorn --workers 3 --bind unix:flaskapp.sock -m 777 flaskapi:app
+
+[Install]
+WantedBy=multi-user.target

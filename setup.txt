@@ -1,0 +1,24 @@
+=========Python Flask API ========
+
+i)  Python Installation with other services
+sudo apt install -y python3 nginx python3-pip
+pip3 install flask python-dotenv pyopenssl gunicorn
+
+ii)  Gunicorn is required for setting up 3 worker services
+
+iii) Move "flaskapp.service" to /etc/systemd/system/flaskapp.service
+
+iv) Create keypairs using following commands
+     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /home/user/Python_api/selfsigned.key -out /home/user/Python_api/selfsigned.crt
+     openssl dhparam -out /home/user/Python_api/dhparam.pem 4096
+ 
+iv)  Move "flaskapi" to /etc/nginx/sites-enabled/
+
+v) Steps to start nginx server
+   
+   sudo systemctl enable nginx.service
+   sudo systemctl stop nginx.service
+   sudo systemctl start nginx.service
+   sudo systemctl status flaskapp.service
+   sudo systemctl status nginx.service
+   sudo nginx -t 

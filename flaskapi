@@ -1,0 +1,14 @@
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /home/user/Python_api/selfsigned.crt;
+    ssl_certificate_key /home/user/Python_api/selfsigned.key;
+
+    ssl_dhparam /home/user/Python_api/dhparam.pem;
+    location / {
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header HOST $http_host;
+                proxy_pass http://unix:/home/user/Python_api/flaskapp.sock:/;
+                proxy_redirect off;
+            }
+}
